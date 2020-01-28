@@ -1,0 +1,71 @@
+.factions .collapsed .faction-description {
+    display: none;
+}
+.factions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1rem;
+    padding: 0;
+}
+
+.factions li {
+    list-style: none;
+    width: 45%;
+    margin: 0 0 20px 0;
+}
+
+.factions .note {
+    font-size: .8rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.link {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.link:hover {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-open .modal {
+    display: block;
+}
+
+.modal-content {
+    padding: 1rem;
+}
+
+.modal-body {
+    overflow: hidden;
+    padding: 0;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.slider.active {
+    transform: translateX(-100%);
+}
+
+.slide {
+    flex: 1 0 100%;
+}
+
+.closeModal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.closeModal:hover {
+    cursor: pointer;
+}
