@@ -7,7 +7,7 @@ function Faction(props: any) {
     let infoLoaderCorporation;
     let infoLoaderSolarSystem;
 
-    if (faction.isOpened) {
+    if (props.isOpened) {
         infoLoaderSolarSystem = <FactionInfoLoader
             title="Solar System"
             id={props.faction['solar_system_id']}
@@ -15,7 +15,7 @@ function Faction(props: any) {
             updateFaction={(propName: string, propValue: any) => props.updateFaction(propName, propValue, props.index)}
             value={props.faction.solarSystem ? props.faction.solarSystem.name : ''}
             isLink={false}
-            openModal={(e: any) => props.openModal(e, props.index)}
+            toggleModal={(e: any) => props.toggleModal(e, props.index)}
         />;
         infoLoaderCorporation = <FactionInfoLoader
             title="Corporation"
@@ -24,12 +24,12 @@ function Faction(props: any) {
             updateFaction={(propName: string, propValue: any) => props.updateFaction(propName, propValue, props.index)}
             value={props.faction.corporation ? props.faction.corporation.name : ''}
             isLink={true}
-            openModal={(e: any) => props.openModal(e, props.index)}
+            toggleModal={(e: any) => props.toggleModal(e, props.index)}
         />;
     }
 
     return (
-        <li className={faction.isOpened ? 'opened' : 'collapsed'}>
+        <li className={props.isOpened ? 'opened' : 'collapsed'}>
             <div className="card">
                 <div
                     className="card-header"

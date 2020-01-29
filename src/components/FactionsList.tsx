@@ -7,7 +7,8 @@ class FactionsList extends React.Component<{}, {
     factions: object[],
     isLoaded: boolean,
     isModal: boolean,
-    selectedIndex: any
+    selectedIndex: any,
+    factionsExpandedState: any
 }> {
     constructor(props: any) {
         super(props);
@@ -16,7 +17,8 @@ class FactionsList extends React.Component<{}, {
             isLoaded: false,
             factions: [],
             isModal: false,
-            selectedIndex: null
+            selectedIndex: null,
+            factionsExpandedState: []
         };
     }
 
@@ -29,7 +31,8 @@ class FactionsList extends React.Component<{}, {
                 if (response){
                     this.setState({
                         isLoaded: true,
-                        factions: response
+                        factions: response,
+                        factionsExpandedState: Array(response.length).fill(false)
                     });
                 }
             })
@@ -38,16 +41,10 @@ class FactionsList extends React.Component<{}, {
             });
     }
 
-    openModal(e: any, index: number) {
+    toggleModal(e: any, index: number) {
         this.setState({
-            isModal: true,
+            isModal: !this.state.isModal,
             selectedIndex: index
-        });
-    }
-
-    closeModal() {
-        this.setState({
-            isModal: false
         });
     }
 
@@ -63,13 +60,12 @@ class FactionsList extends React.Component<{}, {
     }
 
     handleClick(e: any, index: number) {
-        const factions = this.state.factions.slice();
-        const clicked: any = factions[index];
+        const factionsExpandedState = [...this.state.factionsExpandedState];
 
-        clicked.isOpened = clicked.isOpened ? !clicked.isOpened : true; // refactor -> to array
+        factionsExpandedState[index] = !factionsExpandedState[index];
 
         this.setState({
-            factions: factions
+            factionsExpandedState: factionsExpandedState
         });
     }
 
@@ -96,6 +92,7 @@ class FactionsList extends React.Component<{}, {
 
     render() {
         const factions: any = this.state.factions;
+        let factionsExpandedState = this.state.factionsExpandedState;
         let selectedIndex = this.state.selectedIndex;
         let selectedFaction = factions[selectedIndex];
 
@@ -107,14 +104,15 @@ class FactionsList extends React.Component<{}, {
                             key={index}
                             index={index}
                             faction={faction}
+                            isOpened={factionsExpandedState[index]}
                             onClick={(e: any) => this.handleClick(e, index)}
                             updateFaction={(propName: string, propValue: any) => this.updateFaction(propName, propValue, index)}
-                            openModal={(e: any) => this.openModal(e, index)}
+                            toggleModal={(e: any) => this.toggleModal(e, index)}
                         />
                     )}
                 </ul>
                 {this.state.isModal && (
-                    <Popup>
+                    <Popup onClick={(e: any) => this.toggleModal(e, selectedIndex)}>
                         <div className={"slider" + (selectedFaction.slide ? ' active' : '')}>
                             {selectedFaction && (
                                 <div className="slide">
@@ -127,7 +125,7 @@ class FactionsList extends React.Component<{}, {
                                         updateFaction={(propName: string, propValue: any) => this.updateFaction(propName, propValue, selectedIndex)}
                                         value={selectedFaction.character ? selectedFaction.character.name : ''}
                                         isLink={true}
-                                        openModal={(e: any) => this.slideModal(e, selectedIndex)}
+                                        toggleModal={(e: any) => this.slideModal(e, selectedIndex)}
                                     />
                                     <p>Description: {selectedFaction.corporation.description}</p>
                                 </div>
@@ -143,13 +141,10 @@ class FactionsList extends React.Component<{}, {
                                         updateFaction={(propName: string, propValue: any) => this.updateFaction(propName, propValue, selectedIndex)}
                                         value={this.getRace(selectedFaction)}
                                         isLink={false}
-                                        openModal={(e: any) => this.slideModal(e, selectedIndex)}
+                                        toggleModal={(e: any) => this.slideModal(e, selectedIndex)}
                                     />
                                 </div>
                             )}
-                        </div>
-                        <div className="closeModal" onClick={() => this.closeModal()}>
-                            <span>×</span>
                         </div>
                     </Popup>
                 )}

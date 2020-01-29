@@ -8,11 +8,14 @@ function Popup(props: any) {
                     <div className='modal-content'>
                         <div className="modal-body">
                             {props.children}
+                            <div className="closeModal" onClick={(e) => props.onClick(e)}>
+                                <span>×</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div className="modal-backdrop fade show" onClick={(e) => props.onClick(e)} />
             </div>
-            <div className="modal-backdrop fade show"></div>
         </div>
     );
 }

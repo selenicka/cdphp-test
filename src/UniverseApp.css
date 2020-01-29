@@ -1,0 +1,25 @@
+.nav-item {
+    width: 50%;
+    text-align: center;
+}
+
+.nav-item:not(.active) {
+    background-color: #efefef;
+    border-bottom: 1px solid #000;
+}
+
+.nav-item:not(:first-child) {
+    border-left: 1px solid #000;
+}
+
+.searchForm {
+    display: flex;
+}
+
+.btn {
+    height: calc(2.25rem + 2px);
+}
+
+.form-control.error {
+    border-color: red;
+}

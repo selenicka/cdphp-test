@@ -7,7 +7,7 @@ class FactionInfoLoader extends React.Component<{
     updateFaction: any,
     value: any,
     isLink: boolean,
-    openModal: any
+    toggleModal: any
 }, {}> {
     componentDidMount() {
         const urlAPI: { [key: string]: string; } = {
@@ -38,7 +38,7 @@ class FactionInfoLoader extends React.Component<{
                     {this.props.title}: {this.props.isLink ? (
                             <span
                                 className="link"
-                                onClick={(e) => this.props.openModal(e)}
+                                onClick={(e) => this.props.toggleModal(e)}
                             >{this.props.value}</span>
                         ) : (
                             <span>{this.props.value}</span>
