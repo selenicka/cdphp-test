@@ -29,7 +29,6 @@ class Search extends React.Component<{}, {
             .then(r => r.json())
             .then((response) => {
                 if (Object.keys(response).length > 0){
-                    // console.log(response);
                     this.parseResult(response, fields.category);
                 }
             })
