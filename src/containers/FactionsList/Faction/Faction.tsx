@@ -1,30 +1,34 @@
-import React from 'react';
-import './faction.css';
-import FactionInfoLoader from './factionInfoLoader';
+import React, {useEffect} from 'react';
+import './Faction.css';
+import FactionInfo from './FactionInfo/FactionInfo';
 
 function Faction(props: any) {
     const faction = props.faction;
     let infoLoaderCorporation;
     let infoLoaderSolarSystem;
 
+    // useEffect(() => {
+    //     console.log('useEffect for ' + faction.name);
+    // });
+
     if (props.isOpened) {
-        infoLoaderSolarSystem = <FactionInfoLoader
+        infoLoaderSolarSystem = <FactionInfo
             title="Solar System"
             id={props.faction['solar_system_id']}
-            urlKey="solarSystem"
-            updateFaction={(propName: string, propValue: any) => props.updateFaction(propName, propValue, props.index)}
-            value={props.faction.solarSystem ? props.faction.solarSystem.name : ''}
+            urlKey="solar_system"
+            updateFactionData={props.updateFactionData}
+            value={props.faction['solar_system'] ? props.faction['solar_system'].name : ''}
             isLink={false}
-            toggleModal={(e: any) => props.toggleModal(e, props.index)}
+            toggleModal={props.toggleModal}
         />;
-        infoLoaderCorporation = <FactionInfoLoader
+        infoLoaderCorporation = <FactionInfo
             title="Corporation"
             id={props.faction['corporation_id']}
             urlKey="corporation"
-            updateFaction={(propName: string, propValue: any) => props.updateFaction(propName, propValue, props.index)}
+            updateFactionData={props.updateFactionData}
             value={props.faction.corporation ? props.faction.corporation.name : ''}
             isLink={true}
-            toggleModal={(e: any) => props.toggleModal(e, props.index)}
+            toggleModal={props.toggleModal}
         />;
     }
 
@@ -33,7 +37,7 @@ function Faction(props: any) {
             <div className="card">
                 <div
                     className="card-header"
-                    onClick={(e) => props.onClick(e, props.index)}
+                    onClick={props.handleClick}
                 >
                     {faction.name}
                 </div>

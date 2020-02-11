@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import UniverseApp from './UniverseApp';
 import * as serviceWorker from './serviceWorker';
 import 'react-app-polyfill/stable';

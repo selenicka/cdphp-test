@@ -1,28 +1,22 @@
 import React from 'react';
+import * as apiService from '../../../../services/apiService';
 
-class FactionInfoLoader extends React.Component<{
+//todo: replace with function, try to use useEffect instead of componentDidMount
+class FactionInfo extends React.Component<{
     title: string,
-    id: any,
     urlKey: string,
-    updateFaction: any,
+    updateFactionData: any,
     value: any,
     isLink: boolean,
-    toggleModal: any
+    toggleModal: any,
+    id?: number
 }, {}> {
     componentDidMount() {
-        const urlAPI: { [key: string]: string; } = {
-            corporation: 'https://esi.evetech.net/latest/corporations/',
-            solarSystem: 'https://esi.evetech.net/latest/universe/systems/',
-            character: 'https://esi.evetech.net/latest/characters/',
-            races: 'https://esi.evetech.net/latest/universe/races/'
-        };
-
         if(!this.props.value) {
-            fetch(urlAPI[this.props.urlKey] + this.props.id)
-                .then(r => r.json())
+            apiService.getNameById(this.props.urlKey, this.props.id)
                 .then((response) => {
                     if (response) {
-                        this.props.updateFaction(this.props.urlKey, response);
+                        this.props.updateFactionData(this.props.urlKey, response);
                     }
                 })
                 .catch((error) => {
@@ -53,4 +47,4 @@ class FactionInfoLoader extends React.Component<{
     }
 }
 
-export default FactionInfoLoader;
+export default FactionInfo;
