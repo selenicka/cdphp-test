@@ -1,11 +1,10 @@
 import React from 'react';
 import SearchForm from './SearchForm/SearchForm';
 import SearchResult from './SearchResult/SearchResult';
+import { SearchState } from '../../store/types';
 import * as apiService from '../../services/apiService';
 
-class Search extends React.Component<{}, {
-    searchResult: any
-}> {
+class Search extends React.Component<{}, SearchState> {
     constructor(props: any) {
         super(props);
 

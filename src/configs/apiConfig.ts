@@ -38,5 +38,9 @@ export const urlAPIStorage: { [key: string]: any; } = {
     races: {
         searchPattern: '/universe/races/',
         requestType: 'get'
+    },
+    factions: {
+        searchPattern: '/universe/factions/',
+        requestType: 'get'
     }
 };

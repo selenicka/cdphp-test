@@ -5,15 +5,15 @@ import * as apiService from '../../../../services/apiService';
 class FactionInfo extends React.Component<{
     title: string,
     urlKey: string,
-    updateFactionData: any,
-    value: any,
+    updateFactionData: (propName: string, propValue: object) => void,
+    value: string,
     isLink: boolean,
     toggleModal: any,
     id?: number
 }, {}> {
     componentDidMount() {
         if(!this.props.value) {
-            apiService.getNameById(this.props.urlKey, this.props.id)
+            apiService.getDataByKey(this.props.urlKey, this.props.id)
                 .then((response) => {
                     if (response) {
                         this.props.updateFactionData(this.props.urlKey, response);
@@ -32,7 +32,7 @@ class FactionInfo extends React.Component<{
                     {this.props.title}: {this.props.isLink ? (
                             <span
                                 className="link"
-                                onClick={(e) => this.props.toggleModal(e)}
+                                onClick={this.props.toggleModal}
                             >{this.props.value}</span>
                         ) : (
                             <span>{this.props.value}</span>

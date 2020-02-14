@@ -49,10 +49,10 @@ export const getNamesListByIds = async (
     return fetch(url);
 };
 
-export const getNameById = async (
+export const getDataByKey = async (
     categoryName: string,
     id?: number
-): Promise<{}> => {
+): Promise<[]> => {
     let categoryConfig = apiConfig.urlAPIStorage[categoryName];
     let categoryIdTemplate = '{' + categoryName + '_id}';
     let url = '';

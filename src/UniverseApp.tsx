@@ -11,6 +11,9 @@ class UniverseApp extends React.Component<{}, {
     constructor(props: any) {
         super(props);
 
+        const pagesState = Array(2).fill(false);
+        pagesState[0] = true;
+
         this.state = {
             pages: [{
                 pageKey: 'factionsList',
@@ -19,17 +22,8 @@ class UniverseApp extends React.Component<{}, {
                 pageKey: 'search',
                 name: 'Search'
             }],
-            pagesState: []
-        };
-    }
-
-    componentDidMount() {
-        const pagesState = Array(this.state.pages.length).fill(false);
-        pagesState[0] = true;
-
-        this.setState({
             pagesState: pagesState
-        });
+        };
     }
 
     handleClick(e: any, index: number) {
